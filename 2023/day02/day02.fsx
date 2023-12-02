@@ -1,6 +1,5 @@
 #nowarn "25"
 
-open System
 open System.IO
 
 type Hand = { Red: int; Green: int; Blue: int }

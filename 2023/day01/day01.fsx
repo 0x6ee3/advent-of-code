@@ -1,10 +1,6 @@
 open System
 open System.IO
 
-let inputExample1 = File.ReadAllLines("example1.txt") |> List.ofArray
-let inputExample2 = File.ReadAllLines("example2.txt") |> List.ofArray
-let input = File.ReadAllLines("input.txt") |> List.ofArray
-
 let rec findDigit1 line =
     match line with
     | "" -> ""
@@ -35,7 +31,7 @@ let part1 lines =
 let part2 lines =
     lines |> List.map (calibrationNumber findDigit2) |> List.map int |> List.sum
 
-part1 inputExample1 |> printfn "inputExample1: {%A}"
-part1 input |> printfn "input: {%A}"
-part2 inputExample2 |> printfn "inputExample2: {%A}"
-part2 input |> printfn "input: {%A}"
+File.ReadAllLines("example1.txt") |> List.ofArray |> part1 |> printfn "example1: {%A}"
+File.ReadAllLines("input.txt") |> List.ofArray |> part1 |> printfn "part1: {%A}"
+File.ReadAllLines("example2.txt") |> List.ofArray |> part2 |> printfn "example2: {%A}"
+File.ReadAllLines("input.txt") |> List.ofArray |> part2 |> printfn "part2: {%A}"

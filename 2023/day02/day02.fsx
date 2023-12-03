@@ -40,7 +40,7 @@ let part1 lines =
     |> Array.map _.Number
     |> Array.sum
 
-File.ReadAllLines("example1.txt") |> part1 |> printfn "example1: {%A}"
+File.ReadAllLines("example.txt") |> part1 |> printfn "example: {%A}"
 File.ReadAllLines("input.txt") |> part1 |> printfn "input: {%A}"
 
 type MinimalGame = { Number: int; Hand: Hand }
@@ -67,5 +67,5 @@ let part2 lines =
     |> Array.map (fun g -> g.Hand.Blue * g.Hand.Red * g.Hand.Green)
     |> Array.sum
 
-File.ReadAllLines("example1.txt") |> part2 |> printfn "example1: {%A}"
+File.ReadAllLines("example.txt") |> part2 |> printfn "example: {%A}"
 File.ReadAllLines("input.txt") |> part2 |> printfn "input: {%A}"

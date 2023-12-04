@@ -26,7 +26,7 @@ let part1 (lines: string list) =
 File.ReadAllLines("example.txt") |> List.ofArray |> part1 |> printfn "example: %A"
 File.ReadAllLines("input.txt") |> List.ofArray |> part1 |> printfn "input: %A"
 
-let toWinsList id wins: int list =
+let winList id wins =
     match wins with
     | 0 -> []
     | 1 -> [id+1]
@@ -37,7 +37,7 @@ let rec cardWins (rounds: Card list) (wins: int list) (acc: int) =
     | id :: rest ->
         let round = rounds |> List.find (fun c -> c.id = id)
         let wins' = Set.intersectMany [ round.picks; round.wins ] |> Seq.length
-        let wins'' = toWinsList id wins'
+        let wins'' = winList id wins'
         cardWins rounds (wins'' @ rest) (acc + wins''.Length)
     | [] -> acc
 

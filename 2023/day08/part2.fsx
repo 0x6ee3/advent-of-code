@@ -1,6 +1,9 @@
 #nowarn "25"
+#r "nuget: MathNet.Numerics, 5.0.0"
+#r "nuget: MathNet.Numerics.FSharp, 5.0.0"
 open System
 open System.IO
+open MathNet.Numerics
 
 type Path = (String * String * String)
 type Network = { Steps: String; Paths: Path array }
@@ -19,20 +22,12 @@ let walkToZ start network =
     | 'R' -> walk right (steps+1)
   walk start 0
 
-let rec gcd a b =
-  match (a, b) with
-  | (x, 0) -> x
-  | (0, y) -> y
-  | (a, b) -> gcd b (a % b)
-
-let lcm a b = a * b / (gcd a b)
-
 let ghostWalk network =
   network.Paths
   |> Seq.filter (fun (p, _, _) -> p[2] = 'A')
   |> Seq.map (fun (start, _, _) -> walkToZ start network)
-  |> (fun x -> printfn "x = %A" x; x)
-  |> Seq.reduce lcm
+  |> (fun x -> printfn "x = %A" (x |> List.ofSeq); x)
+  |> (fun steps -> Euclid.LeastCommonMultiple (steps |> Seq.map int64 |> Array.ofSeq))
 
 File.ReadAllLines("example3.txt") |> parseNetwork |> ghostWalk |> printfn "steps: %A"
 File.ReadAllLines("input.txt") |> parseNetwork |> ghostWalk |> printfn "steps: %A"

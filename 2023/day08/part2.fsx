@@ -26,8 +26,9 @@ let ghostWalk network =
   network.Paths
   |> Seq.filter (fun (p, _, _) -> p[2] = 'A')
   |> Seq.map (fun (start, _, _) -> walkToZ start network)
-  |> (fun x -> printfn "x = %A" (x |> List.ofSeq); x)
-  |> (fun steps -> Euclid.LeastCommonMultiple (steps |> Seq.map int64 |> Array.ofSeq))
+  |> Seq.map int64
+  |> Array.ofSeq
+  |> Euclid.LeastCommonMultiple
 
 File.ReadAllLines("example3.txt") |> parseNetwork |> ghostWalk |> printfn "steps: %A"
 File.ReadAllLines("input.txt") |> parseNetwork |> ghostWalk |> printfn "steps: %A"

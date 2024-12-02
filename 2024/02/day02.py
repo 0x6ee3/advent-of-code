@@ -18,7 +18,7 @@ def part1(input: str) -> int:
       unsafe.append(levels)
   return len(safe)
 
-def part1(input: str) -> int:
+def part2(input: str) -> int:
   safe = []
   unsafe = []
   for report in input.splitlines():
@@ -39,8 +39,7 @@ def part1(input: str) -> int:
 for filename in ['test.txt', 'input.txt']:
   with open(filename) as f:
     input = f.read()
-  print('= day02 =')
   print(f'== {filename} ==')
   print(f'part1: {part1(input)}')
-#  print(f'part2: {part2(input)}')
+  print(f'part2: {part2(input)}')
 

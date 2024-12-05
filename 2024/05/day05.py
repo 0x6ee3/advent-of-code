@@ -36,8 +36,10 @@ def part2(input: str) -> int:
   for page in pages:
     if not check_rules(page, rules):
       p = page.split(',')
-      while not check_rules(p, rules):
+      valid = False
+      while not valid:
         p = apply_rules(p, rules)
+        valid = check_rules(p, rules)
       page_numbers += int(p[len(p) // 2])
   return page_numbers
 

@@ -30,10 +30,10 @@ let parse (line : string) : int64 * int64 =
 
 test <@ parse "12345-67890" = (12345, 67890) @>
 
-let part1 (line : string) =
+let solve (line : string) =
     line.Split ","
     |> Array.map (parse >> findValidIDs)
     |> Array.sumBy List.sum
 
-File.ReadAllLines "example.txt" |> Array.exactlyOne |> part1 |> printfn "p1 ex %d"
-File.ReadAllLines "input.txt" |> Array.exactlyOne |> part1 |> printfn "p1 in %d"
+File.ReadAllLines "example.txt" |> Array.exactlyOne |> solve |> printfn "example %d"
+File.ReadAllLines "input.txt" |> Array.exactlyOne |> solve |> printfn "input %d"

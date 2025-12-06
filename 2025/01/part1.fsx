@@ -30,5 +30,5 @@ let part1 lines =
     |> List.filter ((=) 0)
     |> List.length
 
-File.ReadAllLines "example.txt" |> List.ofArray |> part1 |> printfn "p1 ex %d"
-File.ReadAllLines "input.txt" |> List.ofArray |> part1 |> printfn "p1 in %d"
+File.ReadAllLines "example.txt" |> List.ofArray |> part1 |> printfn "example %d"
+File.ReadAllLines "input.txt" |> List.ofArray |> part1 |> printfn "input %d"

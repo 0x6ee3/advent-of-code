@@ -92,5 +92,5 @@ let part2 lines =
     |> List.map snd
     |> List.sum
 
-File.ReadAllLines "example.txt" |> List.ofArray |> part2 |> printfn "p2 ex %d"
-File.ReadAllLines "input.txt" |> List.ofArray |> part2 |> printfn "p2 in %d"
+File.ReadAllLines "example.txt" |> List.ofArray |> part2 |> printfn "example %d"
+File.ReadAllLines "input.txt" |> List.ofArray |> part2 |> printfn "input %d"

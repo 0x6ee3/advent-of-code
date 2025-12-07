@@ -29,5 +29,5 @@ let solve (lines : string array) =
     |> List.map (parse >> calculate)
     |> List.sum
 
-File.ReadAllLines "example.txt" |> solve |> printfn "\nexample %d"
-File.ReadAllLines "input.txt" |> solve |> printfn "\ninput %d"
+File.ReadAllLines "example.txt" |> solve |> printfn "example %d"
+File.ReadAllLines "input.txt" |> solve |> printfn "input %d"

@@ -1,12 +1,5 @@
 open System.IO
 
-let example = """
-5973 7497 845 23 5484 92   8
-6499 9645 659 91 7266 28  54
-4319   39 122 88 8952 54  82
-8513    7 965 65  956 21 319
-+    +    *   *  +    +  *  """
-
 let chunkBy predicate input =
     let rec chunk acc cur input =
         match input with
@@ -15,15 +8,26 @@ let chunkBy predicate input =
         | [] -> cur :: acc
     chunk [] [] input |> List.rev |> List.map List.rev
 
+let parse (problem : string seq list) =
+    let len = problem[0] |> Seq.length
+    let numbers = problem |> List.map (Seq.take (len-1) >> String.concat "" >> int64)
+    let op = problem |> List.map Seq.last |> List.filter (fun c -> c <> " ") |> String.concat ""
+    op, numbers
+
+let calculate (op : string, numbers : int64 list) : int64 =
+    match op with
+    | "*" -> numbers |> List.fold (fun a b -> a * b) 1L
+    | "+" -> numbers |> List.sum
+    | _ -> 0
+    
 let solve (lines : string array) =
     lines
     |> Seq.map (Seq.map string)
     |> Seq.transpose
     |> List.ofSeq
     |> chunkBy (Seq.forall ((=) " "))
-    // |> List.map parse
-    |> printf "----\n%A\n----"
-    0
+    |> List.map (parse >> calculate)
+    |> List.sum
 
 File.ReadAllLines "example.txt" |> solve |> printfn "\nexample %d"
-// File.ReadAllLines "input.txt" |> solve |> printfn "\ninput %d"
+File.ReadAllLines "input.txt" |> solve |> printfn "\ninput %d"

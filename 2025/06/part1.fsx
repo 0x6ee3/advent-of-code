@@ -1,12 +1,17 @@
 open System.IO
 
-let example = """123 328  51 64 
- 45 64  387 23 
-  6 98  215 314
-*   +   *   +  """
+let calculate line =
+    match line |> List.ofSeq |> List.rev with 
+    | "+" :: nums -> nums |> List.map int64 |> List.sum
+    | "*" :: nums -> nums |> List.map int64 |> List.fold (fun a b -> a * b) 1
+    | _ -> 0
 
-let solve (lines : string) =
-    0
+let solve (lines : string array) =
+    lines
+    |> Seq.map (fun line -> line.Split " " |> Seq.filter (fun s -> s <> ""))
+    |> Seq.transpose
+    |> Seq.map calculate
+    |> Seq.sum
 
-File.ReadAllText "example.txt" |> solve |> printfn "example %d"
-File.ReadAllText "input.txt" |> solve |> printfn "input %d"
+File.ReadAllLines "example.txt" |> solve |> printfn "example %d"
+File.ReadAllLines "input.txt" |> solve |> printfn "input %d"

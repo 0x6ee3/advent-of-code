@@ -1,4 +1,3 @@
-#r "nuget: Unquote, 7.0.1"
 open System.IO
 
 let parse (row : int) (line : string) : (int * int) seq =

@@ -3,3 +3,5 @@ node_modules/
 .vscode/
 .fake
 .config/
+example*.txt
+input*.txt
